@@ -16,20 +16,22 @@ public class OrderFormPage {
     private By stationInput = By.className("select-search__input");
     // Поле ввода номера телефона
     private By phoneNumberInput = By.cssSelector("input[placeholder='* Телефон: на него позвонит курьер']");
-    //
+    // Кнопка Далее
     private By nextButton = By.className("Button_Middle__1CSJM");
-    //
+    // Поле ввода даты
     private By dateInput = By.cssSelector("input[placeholder='* Когда привезти самокат']");
-    //
+    // Выпадающий список срока
     private By deadlineDropdown = By.className("Dropdown-root");
-    //
+    // Список сроков
     private By daysDropdown = By.className("Dropdown-option");
-    //
+    // Чекбокс черного цвета
     private By color = By.cssSelector("label[for='black']");
-    //
+    // Кнопка Заказать
     private By orderButton = By.xpath("(//button[contains(text(),'Заказать')])[2]");
-    //
+    // Кнопка Да в модальном окне
     private By acceptButton = By.xpath("(//button[contains(text(),'Да')])");
+    // Окно об успешном создании заказа
+    private By orderModalWindow = By.xpath("//div[text()='Заказ оформлен']");
 
     public OrderFormPage(WebDriver driver) {
         this.driver = driver;
@@ -84,4 +86,7 @@ public class OrderFormPage {
         driver.findElement(acceptButton).click();
     }
 
+    public void orderSuccessModalWindowIsVisible() {
+        driver.findElement(orderModalWindow).isDisplayed();
+    }
 }

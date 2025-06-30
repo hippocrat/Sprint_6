@@ -1,7 +1,6 @@
 package tests;
 
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.openqa.selenium.WebDriver;
@@ -16,9 +15,10 @@ public class OrderFormTest {
 
     @ParameterizedTest
     @CsvSource({
-            "Егор, Иванов, ул. Берегового 43, Черкизовская, +74943874378, 01.07.2025, 1"
+            "Егор, Иванов, ул. Берегового 43, Черкизовская, +74943874378, 01.07.2025, 1",
+            "Ольга, Петрова, ул. Шаляпина 67, Сокольники, +74932656453, 02.07.2025, 2"
             })
-    public void test(String name, String surname, String address, String station, String phoneNumber, String date, int deadLine) {
+    public void createOrdersWithDifferentDataAreSuccess(String name, String surname, String address, String station, String phoneNumber, String date, int deadLine) {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--no-sandbox", "--disable-dev-shm-usage");
         driver = new ChromeDriver(options);
@@ -41,7 +41,7 @@ public class OrderFormTest {
         orderFormPage.clickOrderButton();
         orderFormPage.clickAcceptButton();
 
-//        Assertions.assertEquals();
+        orderFormPage.orderSuccessModalWindowIsVisible();
     }
 
     @AfterEach
